@@ -1,0 +1,194 @@
+/* ============================================
+   BATTLE STATUS - CSS MODULE
+   ============================================ */
+
+.battleStatus {
+  position: relative;
+}
+
+.title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-lg);
+  color: var(--force-blue);
+  text-shadow: 0 0 10px var(--force-blue-glow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.engagementName {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Metrics Grid */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.metricCard {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.metricLabel {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.metricValue {
+  font-size: var(--text-2xl);
+  font-weight: bold;
+}
+
+.metricValue.allied {
+  color: var(--jedi-green);
+  text-shadow: 0 0 10px var(--jedi-green-glow);
+}
+
+.metricValue.enemy {
+  color: var(--empire-red);
+  text-shadow: 0 0 10px var(--empire-red-glow);
+}
+
+/* Threat Level */
+.threatCard {
+  background: var(--glass-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.threatLevel {
+  font-size: var(--text-lg);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+.threatLevel.low {
+  background: var(--jedi-green-dim);
+  color: var(--jedi-green);
+  border: 1px solid var(--jedi-green);
+}
+
+.threatLevel.medium {
+  background: rgba(255, 200, 0, 0.15);
+  color: #ffc800;
+  border: 1px solid #ffc800;
+}
+
+.threatLevel.high {
+  background: var(--empire-red-dim);
+  color: var(--empire-red);
+  border: 1px solid var(--empire-red);
+  animation: threatPulse 1s ease-in-out infinite;
+}
+
+.threatLevel.critical {
+  background: var(--empire-red);
+  color: white;
+  border: 1px solid var(--empire-red);
+  animation: threatPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes threatPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Power Distribution */
+.powerSection {
+  margin-top: var(--space-xl);
+}
+
+.sectionTitle {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+}
+
+.powerBars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.powerBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.powerLabel {
+  width: 80px;
+  font-size: var(--text-sm);
+  color: var(--text-main);
+}
+
+.powerTrack {
+  flex: 1;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.powerFill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: bold;
+  color: var(--galactic-bg);
+}
+
+.powerFill.shields {
+  background: linear-gradient(90deg, var(--force-blue), rgba(0, 229, 255, 0.8));
+  box-shadow: 0 0 10px var(--force-blue-glow);
+}
+
+.powerFill.weapons {
+  background: linear-gradient(90deg, var(--empire-red), rgba(255, 0, 60, 0.8));
+  box-shadow: 0 0 10px var(--empire-red-glow);
+}
+
+.powerValue {
+  width: 50px;
+  text-align: right;
+  font-size: var(--text-sm);
+  color: var(--text-main);
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .powerLabel {
+    width: 60px;
+  }
+}

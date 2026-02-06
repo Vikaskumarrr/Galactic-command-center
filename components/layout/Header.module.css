@@ -1,0 +1,403 @@
+/* ============================================
+   HEADER - CSS MODULE
+   ============================================ */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  height: var(--header-height);
+  background: var(--glass-bg-solid);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Left Section - Toggle + Branding */
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.toggleButton:hover {
+  border-color: var(--force-blue);
+  color: var(--force-blue);
+  box-shadow: 0 0 10px var(--force-blue-glow);
+}
+
+.toggleButton:focus-visible {
+  outline: 2px solid var(--force-blue);
+  outline-offset: 2px;
+}
+
+/* Branding */
+.branding {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--empire-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px var(--empire-red-glow);
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandTitle {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--force-blue);
+  text-shadow: 0 0 8px var(--force-blue-glow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.brandSubtitle {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+/* Right Section - User & Notifications */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.notificationButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.notificationButton:hover {
+  border-color: var(--force-blue);
+  color: var(--force-blue);
+}
+
+.notificationButton:focus-visible {
+  outline: 2px solid var(--force-blue);
+  outline-offset: 2px;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  background: var(--empire-red);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px var(--empire-red-glow);
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.userAvatar:hover {
+  border-color: var(--force-blue);
+  color: var(--force-blue);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 var(--space-md);
+  }
+
+  .brandText {
+    display: none;
+  }
+
+  .brandTitle {
+    font-size: var(--text-xs);
+  }
+}
+
+
+/* ============================================
+   DROPDOWN MENUS
+   ============================================ */
+
+.dropdownContainer {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 280px;
+  background: var(--glass-bg-solid);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px var(--force-blue-glow);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--glass-border);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--force-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.clearAllBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: normal;
+  transition: color var(--duration-fast) ease;
+}
+
+.clearAllBtn:hover {
+  color: var(--empire-red);
+}
+
+.dropdownContent {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: var(--glass-border);
+  margin: var(--space-xs) 0;
+}
+
+/* Notification Items */
+.notificationItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background var(--duration-fast) ease;
+}
+
+.notificationItem:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.notificationItem:last-child {
+  border-bottom: none;
+}
+
+.notifIcon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notifIconAlert {
+  color: var(--empire-red);
+}
+
+.notifIconWarning {
+  color: var(--warning-yellow);
+}
+
+.notifIconInfo {
+  color: var(--force-blue);
+}
+
+.notifContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.notifTitle {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.notifMessage {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.notifTime {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.dismissBtn {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) ease;
+}
+
+.dismissBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--empire-red);
+}
+
+.emptyState {
+  padding: var(--space-xl);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: var(--text-sm);
+}
+
+/* Profile Dropdown */
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.profileAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--force-blue), var(--rebel-green));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 0 16px var(--force-blue-glow);
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileName {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.profileRole {
+  font-size: var(--text-xs);
+  color: var(--rebel-green);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Menu Items */
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--duration-fast) ease;
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--force-blue);
+}
+
+.menuItem svg {
+  color: var(--text-dim);
+  transition: color var(--duration-fast) ease;
+}
+
+.menuItem:hover svg {
+  color: var(--force-blue);
+}
+
+.menuItemDanger:hover {
+  color: var(--empire-red);
+}
+
+.menuItemDanger:hover svg {
+  color: var(--empire-red);
+}

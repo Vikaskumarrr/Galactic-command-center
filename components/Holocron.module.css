@@ -1,0 +1,63 @@
+/* ============================================
+   HOLOCRON - CSS MODULE
+   ============================================ */
+
+.holocron {
+  text-align: center;
+  border: 1px solid var(--jedi-green);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 15px rgba(0, 255, 136, 0.2),
+      inset 0 0 15px rgba(0, 255, 136, 0.05);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 136, 0.4),
+      inset 0 0 20px rgba(0, 255, 136, 0.1);
+  }
+}
+
+.icon {
+  margin-bottom: var(--space-md);
+  color: var(--jedi-green);
+  filter: drop-shadow(0 0 8px var(--jedi-green));
+}
+
+.quote {
+  font-style: italic;
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-lg);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.speaker {
+  color: var(--jedi-green);
+  text-shadow: 0 0 8px var(--jedi-green-glow);
+  font-size: var(--text-base);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Scanline effect */
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--jedi-green-glow), transparent);
+  opacity: 0.2;
+  animation: scanlineMove 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanlineMove {
+  0% { top: 0; }
+  100% { top: 100%; }
+}

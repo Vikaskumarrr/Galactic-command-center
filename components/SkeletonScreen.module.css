@@ -1,0 +1,186 @@
+/* ============================================
+   SKELETON SCREEN - CSS MODULE
+   ============================================ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--glass-border) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    var(--glass-border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Card Variant */
+.cardSkeleton {
+  padding: var(--space-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.cardAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.cardTitle {
+  height: 20px;
+  width: 60%;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.cardLine {
+  height: 14px;
+}
+
+.cardLineFull {
+  width: 100%;
+}
+
+.cardLineMedium {
+  width: 80%;
+}
+
+.cardLineShort {
+  width: 50%;
+}
+
+/* List Variant */
+.listSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+}
+
+.listIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.listContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.listTitle {
+  height: 16px;
+  width: 70%;
+}
+
+.listSubtitle {
+  height: 12px;
+  width: 40%;
+}
+
+/* Grid Variant */
+.gridSkeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-md);
+}
+
+.gridItem {
+  aspect-ratio: 1;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.gridIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.gridLabel {
+  height: 14px;
+  width: 60%;
+}
+
+/* Chart Variant */
+.chartSkeleton {
+  padding: var(--space-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.chartTitle {
+  height: 20px;
+  width: 40%;
+}
+
+.chartLegend {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.chartLegendItem {
+  height: 16px;
+  width: 60px;
+}
+
+.chartBars {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  height: 120px;
+}
+
+.chartBar {
+  flex: 1;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}

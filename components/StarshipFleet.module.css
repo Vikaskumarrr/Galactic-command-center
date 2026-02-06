@@ -1,0 +1,140 @@
+/* ============================================
+   STARSHIP FLEET - CSS MODULE
+   ============================================ */
+
+.starshipFleet {
+  position: relative;
+}
+
+.title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-lg);
+  color: var(--force-blue);
+  text-shadow: 0 0 10px var(--force-blue-glow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.shipList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.shipCard {
+  padding: var(--space-md);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all var(--duration-normal) ease;
+}
+
+.shipCard:hover {
+  border-color: var(--force-blue);
+  background: rgba(0, 229, 255, 0.05);
+  box-shadow: 
+    0 0 20px var(--force-blue-glow),
+    inset 0 0 20px rgba(0, 229, 255, 0.02);
+  transform: translateX(4px);
+}
+
+.shipHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.shipName {
+  font-weight: bold;
+  color: var(--text-main);
+  font-size: var(--text-base);
+}
+
+.shipModel {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.statusBadge {
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statusActive {
+  background: var(--jedi-green-dim);
+  color: var(--jedi-green);
+  border: 1px solid var(--jedi-green);
+}
+
+.statusRepair {
+  background: rgba(255, 200, 0, 0.15);
+  color: #ffc800;
+  border: 1px solid #ffc800;
+}
+
+.statusCombat {
+  background: var(--empire-red-dim);
+  color: var(--empire-red);
+  border: 1px solid var(--empire-red);
+}
+
+.statsRow {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.statItem {
+  flex: 1;
+}
+
+.statHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  margin-bottom: 2px;
+  color: var(--text-dim);
+}
+
+.statValue {
+  color: var(--text-main);
+}
+
+.progressBar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width var(--duration-slow) ease-out;
+}
+
+.progressBlue {
+  background: var(--force-blue);
+  box-shadow: 0 0 5px var(--force-blue);
+}
+
+.progressGreen {
+  background: var(--jedi-green);
+  box-shadow: 0 0 5px var(--jedi-green);
+}
+
+.progressRed {
+  background: var(--empire-red);
+  box-shadow: 0 0 5px var(--empire-red);
+}
+
+.progressYellow {
+  background: #ffc800;
+  box-shadow: 0 0 5px #ffc800;
+}

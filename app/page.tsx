@@ -1,64 +1,107 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState, useEffect } from 'react';
+import { Header } from '@/components/layout/Header';
+import { Sidebar } from '@/components/layout/Sidebar';
+import { GalacticChat } from '@/components/GalacticChat';
+import { SplashScreen } from '@/components/SplashScreen';
+import { STORAGE_KEYS, MOBILE_BREAKPOINT } from '@/lib/theme';
+import styles from './page.module.css';
 
 export default function Home() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+
+  // Handle hydration and initial state from localStorage
+  useEffect(() => {
+    setIsHydrated(true);
+    
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Load sidebar state from localStorage
+    const savedState = localStorage.getItem(STORAGE_KEYS.SIDEBAR_STATE);
+    if (savedState !== null) {
+      setIsSidebarOpen(JSON.parse(savedState));
+    } else if (window.innerWidth < MOBILE_BREAKPOINT) {
+      setIsSidebarOpen(false);
+    }
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Persist sidebar state to localStorage
+  useEffect(() => {
+    if (isHydrated) {
+      localStorage.setItem(STORAGE_KEYS.SIDEBAR_STATE, JSON.stringify(isSidebarOpen));
+    }
+  }, [isSidebarOpen, isHydrated]);
+
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(prev => !prev);
+  };
+
+  const handleCloseSidebar = () => {
+    if (isMobile) {
+      setIsSidebarOpen(false);
+    }
+  };
+
+  // Prevent flash of incorrect layout during hydration
+  if (!isHydrated) {
+    return (
+      <div className={styles.appShell}>
+        <div className={styles.header} />
+        <div className={styles.sidebar} />
+        <main className={styles.mainContent} />
+      </div>
+    );
+  }
+
+  // Show splash screen on initial load
+  if (showSplash) {
+    return <SplashScreen onComplete={() => setShowSplash(false)} />;
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className={`${styles.appShell} ${!isSidebarOpen ? styles.sidebarCollapsed : ''}`}>
+      <div className={styles.header}>
+        <Header 
+          onToggleSidebar={handleToggleSidebar} 
+          isSidebarOpen={isSidebarOpen} 
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </div>
+
+      <div className={`${styles.sidebar} ${isMobile && isSidebarOpen ? styles.sidebarOpen : ''}`}>
+        <Sidebar 
+          isOpen={isSidebarOpen} 
+          onClose={handleCloseSidebar} 
+        />
+      </div>
+
+      {/* Mobile backdrop */}
+      {isMobile && (
+        <div 
+          className={`${styles.sidebarBackdrop} ${isSidebarOpen ? styles.visible : ''}`}
+          onClick={handleCloseSidebar}
+          aria-hidden="true"
+        />
+      )}
+
+      <main className={styles.mainContent} role="main" aria-label="Main content">
+        <div className={styles.holoOverlay} aria-hidden="true" />
+        <div className={styles.mainContentInner}>
+          <div className={styles.chatContainer}>
+            <GalacticChat 
+              welcomeMessage="Welcome, Commander. The Force is strong with this UI. What tactical data do you require?"
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
         </div>
       </main>
     </div>

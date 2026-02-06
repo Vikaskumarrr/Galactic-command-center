@@ -1,0 +1,226 @@
+/* ============================================
+   GALACTIC CHAT - CSS MODULE
+   ============================================ */
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+}
+
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Message Bubbles */
+.messageBubble {
+  display: flex;
+  gap: var(--space-sm);
+  max-width: 85%;
+  animation: fadeSlideIn 0.3s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userMessage {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.assistantMessage {
+  align-self: flex-start;
+}
+
+.messageIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userMessage .messageIcon {
+  background: var(--force-blue);
+  color: var(--galactic-bg);
+  box-shadow: 0 0 10px var(--force-blue-glow);
+}
+
+.assistantMessage .messageIcon {
+  background: var(--glass-bg);
+  border: 1px solid var(--jedi-green);
+  color: var(--jedi-green);
+  box-shadow: 0 0 10px var(--jedi-green-glow);
+}
+
+.messageContent {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--text-main);
+}
+
+.userMessage .messageContent {
+  background: var(--force-blue-dim);
+  border-color: var(--force-blue);
+}
+
+.assistantMessage .messageContent {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+
+.messageText {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--text-main);
+}
+
+.messageText:last-child {
+  margin-bottom: 0;
+}
+
+/* Typing Indicator */
+.typingIndicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  width: fit-content;
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+}
+
+.typingIndicator svg {
+  color: var(--jedi-green);
+}
+
+.dots span {
+  animation: blink 1.4s infinite both;
+}
+
+.dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Input Form */
+.inputForm {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--glass-bg-solid);
+  border-top: 1px solid var(--glass-border);
+}
+
+.input {
+  flex: 1;
+  background: var(--galactic-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--text-main);
+  outline: none;
+  transition: all var(--duration-fast) ease;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  border-color: var(--force-blue);
+  box-shadow: 0 0 0 2px var(--force-blue-glow);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--force-blue);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--galactic-bg);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.sendButton:hover:not(:disabled) {
+  box-shadow: 0 0 15px var(--force-blue);
+  transform: scale(1.05);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sendButton:focus-visible {
+  outline: 2px solid var(--force-blue);
+  outline-offset: 2px;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .messageBubble {
+    max-width: 95%;
+  }
+
+  .inputForm {
+    padding: var(--space-sm);
+  }
+}

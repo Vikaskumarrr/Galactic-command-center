@@ -1,0 +1,189 @@
+/* ============================================
+   HYPERDRIVE CALCULATOR - CSS MODULE
+   ============================================ */
+
+.hyperdriveCalculator {
+  position: relative;
+}
+
+.title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-lg);
+  color: var(--force-blue);
+  text-shadow: 0 0 10px var(--force-blue-glow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input {
+  background: var(--galactic-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--text-main);
+  outline: none;
+  transition: all var(--duration-fast) ease;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  border-color: var(--force-blue);
+  box-shadow: 0 0 0 2px var(--force-blue-glow);
+}
+
+.inputRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.calculateButton {
+  margin-top: var(--space-md);
+}
+
+/* Result Display */
+.result {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--force-blue);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.resultLabel {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resultRoute {
+  font-size: var(--text-sm);
+  color: var(--force-blue);
+}
+
+.resultTime {
+  font-size: var(--text-2xl);
+  font-weight: bold;
+  color: var(--force-blue);
+  text-shadow: 0 0 15px var(--force-blue-glow);
+  text-align: center;
+  margin: var(--space-md) 0;
+}
+
+.resultDistance {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* Hyperspace Animation */
+.hyperspaceEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.streak {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--force-blue), white, var(--force-blue), transparent);
+  animation: hyperspaceStreak 0.8s ease-out forwards;
+}
+
+@keyframes hyperspaceStreak {
+  0% {
+    transform: translateX(-100%) scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0);
+    opacity: 0;
+  }
+}
+
+/* Known Routes List */
+.routesList {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--glass-border);
+}
+
+.routesTitle {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.routeItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: var(--text-sm);
+}
+
+.routeItem:last-child {
+  border-bottom: none;
+}
+
+.routePath {
+  color: var(--text-main);
+}
+
+.routeTime {
+  color: var(--force-blue);
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .inputRow {
+    grid-template-columns: 1fr;
+  }
+}

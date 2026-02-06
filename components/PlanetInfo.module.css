@@ -1,0 +1,87 @@
+/* ============================================
+   PLANET INFO - CSS MODULE
+   ============================================ */
+
+.planetInfo {
+  position: relative;
+}
+
+.title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-md);
+  color: var(--force-blue);
+  text-shadow: 0 0 10px var(--force-blue-glow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.description {
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+  font-size: var(--text-sm);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.statItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.statIcon {
+  color: var(--force-blue);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.statContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.statLabel {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.statValue {
+  font-size: var(--text-sm);
+  color: var(--text-main);
+}
+
+/* Progress bar for population/stats */
+.progressContainer {
+  margin-top: var(--space-xs);
+}
+
+.progressBar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--force-blue);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--force-blue);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}

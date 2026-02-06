@@ -1,0 +1,154 @@
+/* ============================================
+   SPLASH SCREEN - CSS MODULE
+   ============================================ */
+
+.splashScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--galactic-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-splash);
+}
+
+/* Starfield background for splash */
+.splashScreen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 50px 160px, rgba(200,220,255,0.9), transparent),
+    radial-gradient(2px 2px at 90px 40px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 160px 120px, rgba(200,220,255,0.6), transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.5;
+  animation: starsMove 100s linear infinite;
+}
+
+@keyframes starsMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-1000px); }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+/* Logo */
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--empire-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 0 30px var(--empire-red-glow),
+    0 0 60px var(--empire-red-glow);
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 30px var(--empire-red-glow),
+      0 0 60px var(--empire-red-glow);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 
+      0 0 40px var(--empire-red-glow),
+      0 0 80px var(--empire-red-glow);
+  }
+}
+
+.logoIcon {
+  color: white;
+}
+
+/* Title */
+.title {
+  font-size: var(--text-2xl);
+  color: var(--force-blue);
+  text-shadow: 0 0 20px var(--force-blue-glow);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Loading indicator */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.loadingBar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loadingFill {
+  height: 100%;
+  background: var(--force-blue);
+  box-shadow: 0 0 10px var(--force-blue);
+  animation: loadingProgress 2s ease-in-out forwards;
+}
+
+@keyframes loadingProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.loadingText {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Fade out animation */
+.fadeOut {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

@@ -1,0 +1,169 @@
+/* ============================================
+   CREW ROSTER - CSS MODULE
+   ============================================ */
+
+.crewRoster {
+  position: relative;
+}
+
+.title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-lg);
+  color: var(--force-blue);
+  text-shadow: 0 0 10px var(--force-blue-glow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.crewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+.crewCard {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+}
+
+.crewCard:hover {
+  border-color: var(--force-blue);
+  box-shadow: 0 0 15px var(--force-blue-glow);
+}
+
+.crewCard.expanded {
+  grid-column: span 2;
+  border-color: var(--force-blue);
+  box-shadow: 0 0 20px var(--force-blue-glow);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  font-weight: bold;
+  color: var(--galactic-bg);
+  flex-shrink: 0;
+}
+
+.avatar.rebel {
+  background: var(--jedi-green);
+  box-shadow: 0 0 10px var(--jedi-green-glow);
+}
+
+.avatar.imperial {
+  background: var(--empire-red);
+  box-shadow: 0 0 10px var(--empire-red-glow);
+}
+
+.avatar.neutral {
+  background: var(--force-blue);
+  box-shadow: 0 0 10px var(--force-blue-glow);
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.crewName {
+  font-size: var(--text-base);
+  font-weight: bold;
+  color: var(--text-main);
+  margin-bottom: var(--space-xs);
+}
+
+.crewRole {
+  font-size: var(--text-xs);
+  color: var(--force-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.crewSpecies {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  margin-top: var(--space-xs);
+}
+
+/* Expanded Details */
+.expandedDetails {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+.detailRow {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.detailLabel {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.detailValue {
+  font-size: var(--text-sm);
+  color: var(--text-main);
+  flex: 1;
+}
+
+.affiliationBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.affiliationBadge.rebel {
+  background: var(--jedi-green-dim);
+  color: var(--jedi-green);
+  border: 1px solid var(--jedi-green);
+}
+
+.affiliationBadge.imperial {
+  background: var(--empire-red-dim);
+  color: var(--empire-red);
+  border: 1px solid var(--empire-red);
+}
+
+.affiliationBadge.neutral {
+  background: var(--force-blue-dim);
+  color: var(--force-blue);
+  border: 1px solid var(--force-blue);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .crewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .crewCard.expanded {
+    grid-column: span 1;
+  }
+}
