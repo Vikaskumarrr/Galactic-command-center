@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
-import { useTamboThread, useTamboThreadInput } from '@tambo-ai/react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { useTamboThread, useTamboThreadInput, useTamboGenerationStage } from '@tambo-ai/react';
 import { Send, Loader2, Bot, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './GalacticChat.module.css';
@@ -56,6 +56,37 @@ const ChatInput: React.FC<{
 const MessageBubble: React.FC<{ message: DisplayMessage }> = ({ message }) => {
   const isUser = message.role === 'user';
 
+  const renderContent = (text: string) => {
+    if (!text) return null;
+    
+    const parts = text.split(/(```[\s\S]*?```|`[^`]+`)/g);
+    
+    return parts.map((part, i) => {
+      if (part.startsWith('```') && part.endsWith('```')) {
+        const code = part.slice(3, -3).replace(/^\w+\n/, '');
+        return (
+          <pre key={i} className={styles.codeBlock}>
+            <code>{code}</code>
+          </pre>
+        );
+      }
+      if (part.startsWith('`') && part.endsWith('`')) {
+        return <code key={i} className={styles.inlineCode}>{part.slice(1, -1)}</code>;
+      }
+      const boldParts = part.split(/(\*\*[^*]+\*\*)/g);
+      return (
+        <span key={i}>
+          {boldParts.map((bp, j) => {
+            if (bp.startsWith('**') && bp.endsWith('**')) {
+              return <strong key={j} className={styles.boldText}>{bp.slice(2, -2)}</strong>;
+            }
+            return bp;
+          })}
+        </span>
+      );
+    });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -66,15 +97,19 @@ const MessageBubble: React.FC<{ message: DisplayMessage }> = ({ message }) => {
       aria-label={`${isUser ? 'Your message' : 'Assistant response'}`}
     >
       <div className={styles.messageIcon} aria-hidden="true">
-        {isUser ? (
-          <User size={16} />
-        ) : (
-          <Bot size={16} />
-        )}
+        {isUser ? <User size={16} /> : <Bot size={16} />}
       </div>
       <div className={styles.messageContent}>
-        {message.content && <p className={styles.messageText}>{message.content}</p>}
-        {message.component}
+        {message.content && (
+          <div className={styles.messageText}>
+            {isUser ? message.content : renderContent(message.content)}
+          </div>
+        )}
+        {message.component && (
+          <div className={styles.componentWrapper}>
+            {message.component}
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -90,33 +125,45 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
-  // Use Tambo AI hooks for real AI interaction
   const { thread, streaming } = useTamboThread();
-  const { value, setValue, submit, isPending } = useTamboThreadInput();
+  const { value, setValue, submit } = useTamboThreadInput();
+  const { isIdle, generationStage } = useTamboGenerationStage();
 
-  // Track if user has submitted at least once
-  const [hasSubmitted, setHasSubmitted] = React.useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const prevMessageCount = useRef(0);
   
-  // Only show loading after user has actually submitted something
-  // This prevents the initial streaming/isPending state from blocking input
-  const isLoading = hasSubmitted && (streaming || isPending);
+  // Only show loading after user has actually submitted AND Tambo is working
+  const isLoading = hasSubmitted && (!isIdle || streaming);
 
-  // Reset hasSubmitted when response completes
+  // Reset hasSubmitted when new assistant messages arrive (response received)
+  const messageCount = thread?.messages?.length || 0;
   useEffect(() => {
-    if (hasSubmitted && !streaming && !isPending) {
+    if (hasSubmitted && messageCount > prevMessageCount.current) {
+      // New messages arrived — check if the latest is from assistant
+      const lastMsg = thread?.messages?.[messageCount - 1];
+      if (lastMsg && lastMsg.role === 'assistant') {
+        setHasSubmitted(false);
+      }
+    }
+    prevMessageCount.current = messageCount;
+  }, [messageCount, hasSubmitted, thread?.messages]);
+
+  // Also reset when generation stage reaches a terminal state
+  useEffect(() => {
+    if (hasSubmitted && isIdle && !streaming) {
       setHasSubmitted(false);
     }
-  }, [hasSubmitted, streaming, isPending]);
+  }, [hasSubmitted, isIdle, streaming]);
 
   // Convert Tambo messages to display format
-  const displayMessages: DisplayMessage[] = [
+  const displayMessages: DisplayMessage[] = React.useMemo(() => [
     {
       id: 'welcome',
-      role: 'assistant',
+      role: 'assistant' as const,
       content: welcomeMessage,
     },
     ...(thread?.messages || []).map((msg) => {
-      // Extract text content from message parts
       let textContent = '';
       if (Array.isArray(msg.content)) {
         textContent = msg.content
@@ -134,15 +181,15 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
         component: msg.renderedComponent,
       };
     }),
-  ];
+  ], [thread?.messages, welcomeMessage]);
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [displayMessages.length, streaming]);
+  }, [displayMessages.length, streaming, scrollToBottom]);
 
   // Listen for navigation events from sidebar
   useEffect(() => {
@@ -151,9 +198,14 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
       const { prompt } = customEvent.detail;
       if (prompt) {
         setValue(prompt);
-        // Auto-submit after a brief delay
+        setError(null);
+        setHasSubmitted(true);
         setTimeout(() => {
-          submit();
+          submit().catch((err: unknown) => {
+            console.error('Submit failed:', err);
+            setHasSubmitted(false);
+            setError('Failed to send. Please try again.');
+          });
         }, 100);
       }
     };
@@ -164,8 +216,26 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
 
   const handleSubmit = async () => {
     if (value.trim() && !isLoading) {
+      setError(null);
       setHasSubmitted(true);
-      await submit();
+      try {
+        await submit();
+      } catch (err) {
+        console.error('Submit failed:', err);
+        setHasSubmitted(false);
+        setError('Failed to send. Please try again.');
+      }
+    }
+  };
+
+  // Generation stage label for the loading indicator
+  const getStageLabel = () => {
+    switch (generationStage) {
+      case 'CHOOSING_COMPONENT': return 'Analyzing request';
+      case 'FETCHING_CONTEXT': return 'Gathering intel';
+      case 'HYDRATING_COMPONENT': return 'Assembling response';
+      case 'STREAMING_RESPONSE': return 'Transmitting data';
+      default: return 'Processing transmission';
     }
   };
 
@@ -193,10 +263,28 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
             aria-label="Processing your request"
           >
             <Bot size={16} aria-hidden="true" />
-            <span>Processing transmission</span>
+            <span>{getStageLabel()}</span>
             <span className={styles.dots} aria-hidden="true">
               <span>.</span><span>.</span><span>.</span>
             </span>
+          </motion.div>
+        )}
+
+        {error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className={styles.errorMessage}
+            role="alert"
+          >
+            <span>{error}</span>
+            <button 
+              className={styles.errorDismiss}
+              onClick={() => setError(null)}
+              aria-label="Dismiss error"
+            >
+              ×
+            </button>
           </motion.div>
         )}
         

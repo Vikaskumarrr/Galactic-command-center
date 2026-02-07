@@ -106,8 +106,8 @@ export default function LandingPage() {
         <div id="hero" className={`${styles.section} ${styles.heroSection}`}>
           <ErrorBoundary fallback={<HeroFallback />}>
             <HeroSection
-              title="Galactic Command Center"
-              subtitle="Command your fleet, monitor galactic operations, and harness AI-powered intelligence — all from a single holographic interface."
+              title="Think better with Reflect"
+              subtitle="Never miss a note, idea or connection."
               ctaText="Launch Command Center"
               ctaHref="/command"
             />

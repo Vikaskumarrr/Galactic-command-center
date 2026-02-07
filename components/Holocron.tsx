@@ -11,7 +11,7 @@ interface HolocronProps {
   speaker: string;
 }
 
-export const Holocron: React.FC<HolocronProps> = ({ message, speaker }) => {
+export const Holocron: React.FC<Partial<HolocronProps>> = ({ message = '', speaker = '' }) => {
   return (
     <motion.div
       variants={componentAnimationVariants}

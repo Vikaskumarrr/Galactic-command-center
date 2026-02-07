@@ -24,7 +24,7 @@ interface CalculationResult {
   time: string;
 }
 
-export const HyperdriveCalculator: React.FC<HyperdriveCalculatorProps> = ({ knownRoutes }) => {
+export const HyperdriveCalculator: React.FC<Partial<HyperdriveCalculatorProps>> = ({ knownRoutes = [] }) => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [result, setResult] = useState<CalculationResult | null>(null);

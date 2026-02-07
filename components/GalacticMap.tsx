@@ -30,7 +30,7 @@ const getPlanetClass = (type: string) => {
   return '';
 };
 
-export const GalacticMap: React.FC<GalacticMapProps> = ({ planets, routes }) => {
+export const GalacticMap: React.FC<Partial<GalacticMapProps>> = ({ planets = [], routes = [] }) => {
   const [hoveredPlanet, setHoveredPlanet] = useState<Planet | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 

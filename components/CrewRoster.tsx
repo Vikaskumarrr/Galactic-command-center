@@ -38,7 +38,7 @@ const getAffiliationClass = (affiliation: string) => {
   return 'neutral';
 };
 
-export const CrewRoster: React.FC<CrewRosterProps> = ({ crew }) => {
+export const CrewRoster: React.FC<Partial<CrewRosterProps>> = ({ crew = [] }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const handleCardClick = (id: string) => {

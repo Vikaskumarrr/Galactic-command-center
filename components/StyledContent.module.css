@@ -1,0 +1,126 @@
+/* ============================================
+   STYLED CONTENT - CSS MODULE
+   ============================================ */
+
+.styledContent {
+  position: relative;
+}
+
+/* Title */
+.title {
+  color: var(--accent-color, var(--force-blue));
+  text-shadow: 0 0 12px var(--accent-glow, var(--force-blue-glow));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: var(--space-md);
+}
+
+/* Content text */
+.contentText {
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+/* Size variants */
+.sizeSmall .title {
+  font-size: var(--text-base);
+}
+.sizeSmall .contentText,
+.sizeSmall .quoteText {
+  font-size: var(--text-sm);
+}
+
+.sizeMedium .title {
+  font-size: var(--text-xl);
+}
+.sizeMedium .contentText,
+.sizeMedium .quoteText {
+  font-size: var(--text-base);
+}
+
+.sizeLarge .title {
+  font-size: var(--text-2xl);
+}
+.sizeLarge .contentText,
+.sizeLarge .quoteText {
+  font-size: var(--text-lg);
+}
+
+/* Style: heading */
+.heading {
+  text-align: center;
+  border-color: var(--accent-color, var(--force-blue));
+}
+
+.heading .title {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-lg);
+}
+
+/* Style: paragraph */
+.paragraph .contentText {
+  color: var(--text-secondary);
+}
+
+/* Style: quote */
+.quote {
+  border-left: 3px solid var(--accent-color, var(--force-blue));
+  text-align: left;
+}
+
+.quoteText {
+  font-style: italic;
+  color: var(--text-main);
+  line-height: 1.8;
+  padding-left: var(--space-md);
+}
+
+/* Style: highlight */
+.highlight {
+  border-color: var(--accent-color, var(--force-blue));
+  box-shadow: 0 0 20px var(--accent-glow, var(--force-blue-glow));
+}
+
+.highlightBox {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--accent-color, var(--force-blue));
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.highlightBox .contentText {
+  color: var(--accent-color, var(--force-blue));
+  font-weight: 500;
+}
+
+/* Style: banner */
+.banner {
+  overflow: hidden;
+  text-align: center;
+}
+
+.bannerAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--accent-color, var(--force-blue)), transparent);
+  box-shadow: 0 0 15px var(--accent-glow, var(--force-blue-glow));
+}
+
+.banner .title {
+  font-size: var(--text-2xl);
+  margin-top: var(--space-sm);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .sizeLarge .title {
+    font-size: var(--text-xl);
+  }
+  .heading .title {
+    font-size: var(--text-xl);
+  }
+}

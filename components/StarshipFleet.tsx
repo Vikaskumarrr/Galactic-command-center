@@ -34,7 +34,7 @@ const getProgressColor = (value: number) => {
   return styles.progressRed;
 };
 
-export const StarshipFleet: React.FC<StarshipFleetProps> = ({ fleetName, ships }) => {
+export const StarshipFleet: React.FC<Partial<StarshipFleetProps>> = ({ fleetName = '', ships = [] }) => {
   return (
     <motion.div
       variants={componentAnimationVariants}

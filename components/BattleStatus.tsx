@@ -15,13 +15,13 @@ interface BattleStatusProps {
   engagementName: string;
 }
 
-export const BattleStatus: React.FC<BattleStatusProps> = ({
-  alliedForces,
-  enemyForces,
-  threatLevel,
-  shieldPower,
-  weaponPower,
-  engagementName,
+export const BattleStatus: React.FC<Partial<BattleStatusProps>> = ({
+  alliedForces = 0,
+  enemyForces = 0,
+  threatLevel = 'low',
+  shieldPower = 0,
+  weaponPower = 0,
+  engagementName = '',
 }) => {
   return (
     <motion.div

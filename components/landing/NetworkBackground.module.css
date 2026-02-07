@@ -1,0 +1,30 @@
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    /* Let clicks pass through, but we might trap mousemove on parent if needed, handled in JS */
+}
+
+/* Ensure the canvas fills the container */
+.canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Optional vignette for depth */
+.vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 40%, var(--space-black) 90%);
+    pointer-events: none;
+    z-index: 1;
+}

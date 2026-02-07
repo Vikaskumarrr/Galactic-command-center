@@ -50,7 +50,7 @@ const getStatusClass = (status: Mission['status']) => {
   }
 };
 
-export const MissionLog: React.FC<MissionLogProps> = ({ missions }) => {
+export const MissionLog: React.FC<Partial<MissionLogProps>> = ({ missions = [] }) => {
   return (
     <motion.div
       variants={componentAnimationVariants}

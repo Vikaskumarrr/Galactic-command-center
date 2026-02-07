@@ -44,6 +44,7 @@
 
 .assistantMessage {
   align-self: flex-start;
+  max-width: 90%;
 }
 
 .messageIcon {
@@ -92,10 +93,50 @@
 .messageText {
   margin: 0 0 var(--space-sm) 0;
   color: var(--text-main);
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .messageText:last-child {
   margin-bottom: 0;
+}
+
+/* Code blocks in messages */
+.codeBlock {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  margin: var(--space-sm) 0;
+  overflow-x: auto;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: var(--text-xs);
+  color: var(--force-blue);
+  line-height: 1.5;
+}
+
+.inlineCode {
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.85em;
+  color: var(--force-blue);
+}
+
+.boldText {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Component wrapper for rendered components inside messages */
+.componentWrapper {
+  margin-top: var(--space-sm);
+  width: 100%;
+  min-width: 280px;
+  max-width: 600px;
 }
 
 /* Typing Indicator */
@@ -223,4 +264,29 @@
   .inputForm {
     padding: var(--space-sm);
   }
+}
+
+/* Error message */
+.errorMessage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--empire-red-dim);
+  border: 1px solid var(--empire-red);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--empire-red);
+  width: fit-content;
+}
+
+.errorDismiss {
+  background: transparent;
+  border: none;
+  color: var(--empire-red);
+  font-size: var(--text-lg);
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
 }

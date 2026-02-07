@@ -14,12 +14,12 @@ interface PlanetInfoProps {
   description: string;
 }
 
-export const PlanetInfo: React.FC<PlanetInfoProps> = ({ 
-  name, 
-  climate, 
-  population, 
-  terrain, 
-  description 
+export const PlanetInfo: React.FC<Partial<PlanetInfoProps>> = ({ 
+  name = '', 
+  climate = '', 
+  population = '', 
+  terrain = '', 
+  description = '' 
 }) => {
   return (
     <motion.div
