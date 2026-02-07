@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import styles from './page.module.css';
 import { LandingNav } from '@/components/landing/LandingNav';
 import { HeroSection } from '@/components/landing/HeroSection';
+import { RadarSection } from '@/components/landing/RadarSection';
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { DemoSection } from '@/components/landing/DemoSection';
 import { CTASection } from '@/components/landing/CTASection';
@@ -90,8 +92,29 @@ function CTAFallback() {
 }
 
 export default function LandingPage() {
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const elements = pageRef.current?.querySelectorAll(`.${styles.animateOnScroll}`);
+    if (!elements) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={styles.landingPage}>
+    <div className={styles.landingPage} ref={pageRef}>
       {/* Skip navigation link — visually hidden, focusable for keyboard/screen reader users */}
       <a href="#main-content" className={styles.skipNav}>
         Skip to main content
@@ -102,22 +125,31 @@ export default function LandingPage() {
 
       {/* Main content area */}
       <main id="main-content">
-        {/* Hero Section - Animated Space Battle */}
+        {/* Hero Section */}
         <div id="hero" className={`${styles.section} ${styles.heroSection}`}>
           <ErrorBoundary fallback={<HeroFallback />}>
             <HeroSection
-              title="Think better with Reflect"
-              subtitle="Never miss a note, idea or connection."
+              title="Command the Galaxy from One Dashboard"
+              subtitle="AI-powered fleet management, real-time diagnostics, and galactic intelligence — all in one place."
               ctaText="Launch Command Center"
               ctaHref="/command"
             />
           </ErrorBoundary>
         </div>
 
+        {/* Radar Section */}
+        <section
+          id="radar"
+          className={`${styles.section} ${styles.radarSection} ${styles.animateOnScroll}`}
+          aria-label="Radar"
+        >
+          <RadarSection />
+        </section>
+
         {/* Features Section */}
         <section
           id="features"
-          className={`${styles.section} ${styles.featuresSection}`}
+          className={`${styles.section} ${styles.featuresSection} ${styles.animateOnScroll}`}
           aria-label="Features"
         >
           <ErrorBoundary fallback={<FeaturesFallback />}>
@@ -125,10 +157,10 @@ export default function LandingPage() {
           </ErrorBoundary>
         </section>
 
-        {/* Demo Section - Streaming Data Visualization */}
+        {/* Demo Section */}
         <section
           id="demo"
-          className={`${styles.section} ${styles.demoSection}`}
+          className={`${styles.section} ${styles.demoSection} ${styles.animateOnScroll} ${styles.animateDelay1}`}
           aria-label="Demo"
         >
           <ErrorBoundary fallback={<DemoFallback />}>
@@ -142,7 +174,7 @@ export default function LandingPage() {
         {/* Call to Action Section */}
         <section
           id="launch"
-          className={`${styles.section} ${styles.ctaSection}`}
+          className={`${styles.section} ${styles.ctaSection} ${styles.animateOnScroll} ${styles.animateDelay2}`}
           aria-label="Call to action"
         >
           <ErrorBoundary fallback={<CTAFallback />}>
@@ -164,7 +196,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer
-        className={`${styles.section} ${styles.footerSection}`}
+        className={`${styles.section} ${styles.footerSection} ${styles.animateOnScroll} ${styles.animateDelay3}`}
         aria-label="Footer"
       >
         <Footer />

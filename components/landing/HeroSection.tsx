@@ -1,9 +1,9 @@
 'use client';
 
-import { useMemo } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { generateStars } from '@/lib/blackHoleHero';
+import { GravityStarsBackground } from '@/components/animate-ui/components/backgrounds/gravity-stars';
 import styles from './HeroSection.module.css';
 
 export interface HeroSectionProps {
@@ -35,27 +35,33 @@ function SparkleIcon() {
 }
 
 export function HeroSection({ title, subtitle, ctaText, ctaHref }: HeroSectionProps) {
-  const stars = useMemo(() => generateStars(100), []);
-
   return (
     <section className={styles.hero} aria-label="Hero">
-      <div className={styles.starsField} aria-hidden="true">
-        {stars.map((star) => (
-          <div key={star.id} className={styles.star} style={{
-            top: star.top, left: star.left,
-            width: `${star.size}px`, height: `${star.size}px`,
-            animationDuration: star.animationDuration,
-            animationDelay: star.animationDelay,
-          }} />
-        ))}
-      </div>
+      {/* Interactive gravity stars background */}
+      <GravityStarsBackground
+        starsCount={100}
+        starsSize={2}
+        starsOpacity={0.7}
+        glowIntensity={15}
+        glowAnimation="ease"
+        movementSpeed={0.3}
+        mouseInfluence={120}
+        mouseGravity="attract"
+        gravityStrength={80}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          color: '#ffffff',
+        }}
+      />
 
       <div className={styles.heroContent}>
         <motion.a href="#features" className={styles.heroBadge}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}>
           <SparkleIcon />
-          <span className={styles.heroBadgeText}>Take notes using AI</span>
+          <span className={styles.heroBadgeText}>AI-Powered Galactic Operations</span>
         </motion.a>
         <motion.h1 className={styles.heroTitle}
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
@@ -69,62 +75,23 @@ export function HeroSection({ title, subtitle, ctaText, ctaHref }: HeroSectionPr
         </motion.p>
       </div>
 
-      {/* Pure CSS animated black hole */}
-      <div className={styles.blackHoleWrap} aria-hidden="true">
-        <div className={styles.blackHoleCenter}>
-          <div className={styles.ringOuter} />
-          <div className={styles.ringInner} />
-          <div className={styles.accretionDisk} />
-          <div className={styles.core} />
-          <div className={styles.photonRing} />
-        </div>
-        <div className={styles.lightStreak} />
-      </div>
-
-      {/* Video preview + CTA */}
-      <motion.div className={styles.heroVideo}
+      {/* Hero Screenshot */}
+      <motion.div className={styles.heroScreenshot}
         initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.2, 0.8, 0.2, 1], delay: 0.4 }}>
-        <div className={styles.heroVideoPreview}>
-          <div className={styles.appMockup}>
-            <div className={styles.mockupSidebar}>
-              <div className={styles.mockupSearch}>
-                <span>⌕</span>
-                <span className={styles.mockupSearchText}>Search anything...</span>
-                <span className={styles.mockupSearchShortcut}>⌘K</span>
-              </div>
-              <div className={styles.mockupNavItems}>
-                <div className={`${styles.mockupNavItem} ${styles.mockupNavActive}`}><span>📝</span> Daily notes</div>
-                <div className={styles.mockupNavItem}><span>📄</span> All notes</div>
-                <div className={styles.mockupNavItem}><span>✅</span> Tasks</div>
-                <div className={styles.mockupNavItem}><span>🗺️</span> Map</div>
-              </div>
-            </div>
-            <div className={styles.mockupMain}>
-              <div className={styles.mockupDate}>Sun, April 2nd, 2023</div>
-              <div className={styles.mockupNotes}>
-                <div className={styles.mockupNote}>Today I started using Reflect</div>
-                <div className={styles.mockupNote}>What is Reflect?</div>
-                <div className={styles.mockupNoteSub}>A note-taking tool designed to mirror the way we think</div>
-              </div>
-            </div>
-            <div className={styles.mockupCalendar}>
-              <div className={styles.mockupCalendarHeader}>April 2023</div>
-              <div className={styles.mockupCalendarGrid}>
-                {['Mo','Tu','We','Th','Fr','Sa','Su'].map(d => (
-                  <span key={d} className={styles.mockupCalendarDay}>{d}</span>
-                ))}
-              </div>
-            </div>
-          </div>
+        <div className={styles.screenshotWrapper}>
+          <Image
+            src="/Galactic-Command-Center-UI-Strikes-Back-02-07-2026_11_39_PM.png"
+            alt="Galactic Command Center dashboard showing planet data, fleet diagnostics, and AI-powered chat"
+            width={1024}
+            height={768}
+            className={styles.screenshotImage}
+            priority
+          />
+          <div className={styles.screenshotGlow} aria-hidden="true" />
         </div>
-        <div className={styles.heroVideoOverlay}>
+        <div className={styles.screenshotCta}>
           <Link href={ctaHref} className={styles.launchButton}>{ctaText}</Link>
-          <button className={styles.heroVideoPlay} aria-label="Play demo video">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M17.9 10.257C19.26 11.022 19.26 12.979 17.9 13.743L7.98 19.324C6.647 20.073 5 19.11 5 17.58V6.42C5 4.89 6.647 3.927 7.98 4.677L17.9 10.257Z" fill="white" />
-            </svg>
-          </button>
         </div>
       </motion.div>
     </section>

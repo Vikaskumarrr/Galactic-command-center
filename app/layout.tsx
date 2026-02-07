@@ -20,8 +20,8 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Galactic Command Center | UI Strikes Back",
-  description: "Next-gen generative UI command center for the Rebel Alliance. Manage fleets, track missions, and navigate the galaxy.",
+  title: "Galactic Command Center | AI-Powered Fleet Operations",
+  description: "Command your fleet, explore planets, and manage galactic operations with real-time AI-powered diagnostics and intelligence.",
   keywords: ["Star Wars", "Command Center", "Generative UI", "React", "Next.js"],
   authors: [{ name: "Galactic Command" }],
   openGraph: {

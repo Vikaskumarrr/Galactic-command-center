@@ -1,0 +1,292 @@
+/* ============================================
+   RADAR SECTION
+   ============================================ */
+.radarSection {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ============================================
+   MOVING STARFIELD CANVAS
+   ============================================ */
+.starfieldCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   GRADIENT OVERLAYS
+   ============================================ */
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0, 229, 255, 0.04) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.gradientOrb1 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 10%;
+  left: -10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.06) 0%, transparent 70%);
+  filter: blur(60px);
+  z-index: 1;
+  pointer-events: none;
+  animation: orbFloat1 8s ease-in-out infinite;
+}
+
+.gradientOrb2 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  bottom: 5%;
+  right: -8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123, 97, 255, 0.05) 0%, transparent 70%);
+  filter: blur(50px);
+  z-index: 1;
+  pointer-events: none;
+  animation: orbFloat2 10s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -20px); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-25px, 15px); }
+}
+
+.sectionHeader {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.sectionTitle {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: var(--space-md);
+}
+
+.sectionSubtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ============================================
+   RADAR CONTAINER
+   ============================================ */
+.radarContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* ============================================
+   BACKGROUND RINGS
+   ============================================ */
+.radarBackground {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radarRing1,
+.radarRing2,
+.radarRing3 {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.radarRing1 { width: 90%; height: 90%; }
+.radarRing2 { width: 60%; height: 60%; }
+.radarRing3 { width: 30%; height: 30%; }
+
+.radarCrosshairH,
+.radarCrosshairV {
+  position: absolute;
+  background: rgba(0, 229, 255, 0.06);
+}
+
+.radarCrosshairH {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+}
+
+.radarCrosshairV {
+  height: 100%;
+  width: 1px;
+  left: 50%;
+}
+
+/* ============================================
+   CENTER LOGO / PULSE
+   ============================================ */
+.radarLogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radarPulse {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.15);
+  animation: radarPulseAnim 2s ease-out infinite;
+}
+
+.radarDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00e5ff;
+  box-shadow: 0 0 12px 4px rgba(0, 229, 255, 0.5);
+}
+
+@keyframes radarPulseAnim {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* ============================================
+   SCANNER SWEEP
+   ============================================ */
+.scannerWrapper {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.scannerVisible {
+  opacity: 1;
+}
+
+.scanner {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  transform-origin: bottom left;
+  animation: radarSweep 4s linear infinite;
+  background: conic-gradient(
+    from 0deg at 0% 100%,
+    transparent 0deg,
+    rgba(0, 229, 255, 0.2) 30deg,
+    rgba(0, 229, 255, 0.05) 55deg,
+    transparent 60deg
+  );
+}
+
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   RADAR ITEMS (BLIPS)
+   ============================================ */
+.radarItems {
+  position: absolute;
+  inset: 0;
+}
+
+.radarItem {
+  --angle: calc(var(--index) * 51.4deg);
+  --distance: calc(15% + var(--index) * 5%);
+  position: absolute;
+  top: calc(50% + var(--distance) * sin(var(--angle)) * -1);
+  left: calc(50% + var(--distance) * cos(var(--angle)));
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 3px;
+}
+
+.radarDotItem {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.25);
+  animation: blipFade 4s ease-in-out infinite;
+  animation-delay: calc(var(--index) * 0.15s);
+}
+
+.radarItemActive .radarDotItem {
+  background: rgba(0, 229, 255, 0.7);
+  box-shadow: 0 0 6px 2px rgba(0, 229, 255, 0.3);
+}
+
+@keyframes blipFade {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ============================================
+   EDGE FADER
+   ============================================ */
+.radarFader {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: inset 0 0 80px 40px rgba(0, 0, 0, 0.9);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .radarContainer {
+    max-width: 400px;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .radarContainer {
+    max-width: 300px;
+  }
+}

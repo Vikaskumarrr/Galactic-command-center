@@ -10,9 +10,49 @@
 }
 
 /* ============================================
+   GALAXY BACKGROUND WRAPPER - Single fixed instance
+   ============================================ */
+
+.galaxyWrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.galaxyWrapper > * {
+  pointer-events: auto;
+}
+
+/* ============================================
+   SCROLL-TRIGGERED REVEAL ANIMATIONS
+   ============================================ */
+
+.section {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.animateOnScroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animateOnScroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child sections */
+.animateDelay1 { transition-delay: 0.1s; }
+.animateDelay2 { transition-delay: 0.2s; }
+.animateDelay3 { transition-delay: 0.3s; }
+
+/* ============================================
    SKIP NAVIGATION LINK
-   Visually hidden by default, becomes visible on focus
-   for keyboard and screen reader users.
    ============================================ */
 
 .skipNav {
@@ -39,27 +79,6 @@
   outline-offset: 2px;
 }
 
-/* ============================================
-   NAVIGATION (Fixed)
-   ============================================ */
-
-.navSection {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: var(--z-sticky);
-}
-
-/* ============================================
-   SECTION LAYOUT
-   ============================================ */
-
-.section {
-  width: 100%;
-  position: relative;
-}
-
 .heroSection {
   min-height: 100vh;
   display: flex;
@@ -69,27 +88,30 @@
 }
 
 .featuresSection {
-  padding: var(--space-2xl) var(--space-lg);
+  padding: var(--space-2xl) 0;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.radarSection {
+  padding: var(--space-2xl) 0;
+  width: 100%;
+}
+
 .demoSection {
-  padding: var(--space-2xl) var(--space-lg);
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0;
+  width: 100%;
 }
 
 .ctaSection {
   padding: var(--space-2xl) var(--space-lg);
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   text-align: center;
 }
 
 .footerSection {
   padding: var(--space-lg);
-  border-top: 1px solid var(--glass-border);
 }
 
 /* ============================================
@@ -116,7 +138,10 @@
 
 /* Tablet (768px) */
 @media (max-width: 768px) {
-  .featuresSection,
+  .featuresSection {
+    padding: var(--space-xl) 0;
+  }
+
   .demoSection,
   .ctaSection {
     padding: var(--space-xl) var(--space-md);
@@ -133,7 +158,10 @@
 
 /* Mobile (480px) */
 @media (max-width: 480px) {
-  .featuresSection,
+  .featuresSection {
+    padding: var(--space-lg) 0;
+  }
+
   .demoSection,
   .ctaSection {
     padding: var(--space-lg) var(--space-sm);
@@ -141,5 +169,14 @@
 
   .heroSection {
     min-height: 70vh;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animateOnScroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

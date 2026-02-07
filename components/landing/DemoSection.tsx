@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { StreamingDataDisplay } from './StreamingDataDisplay';
+import { HexagonBackground } from '@/components/animate-ui/components/backgrounds/hexagon';
 import styles from './DemoSection.module.css';
 
 export interface DemoSectionProps {
@@ -73,6 +74,20 @@ export function DemoSection({ title, description }: DemoSectionProps) {
 
   return (
     <div ref={sectionRef} className={styles.demoSection} role="region" aria-labelledby="demo-heading">
+      {/* Hexagon grid background */}
+      <HexagonBackground
+        hexagonSize={70}
+        hexagonMargin={3}
+        hexColor="rgba(5, 10, 20, 1)"
+        hexBorderColor="rgba(0, 229, 255, 0.04)"
+        hexHoverColor="rgba(0, 229, 255, 0.1)"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+        }}
+      />
+
       {/* Section header */}
       <motion.div
         className={styles.sectionHeader}
