@@ -1,5 +1,5 @@
 /* ============================================
-   LANDING PAGE - LAYOUT STYLES (Root)
+   LANDING PAGE - LAYOUT STYLES
    ============================================ */
 
 .landingPage {
@@ -8,6 +8,12 @@
   overflow-x: hidden;
   position: relative;
 }
+
+/* ============================================
+   SKIP NAVIGATION LINK
+   Visually hidden by default, becomes visible on focus
+   for keyboard and screen reader users.
+   ============================================ */
 
 .skipNav {
   position: absolute;
@@ -32,6 +38,22 @@
   outline: 2px solid var(--force-blue, #4fc3f7);
   outline-offset: 2px;
 }
+
+/* ============================================
+   NAVIGATION (Fixed)
+   ============================================ */
+
+.navSection {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+}
+
+/* ============================================
+   SECTION LAYOUT
+   ============================================ */
 
 .section {
   width: 100%;
@@ -70,21 +92,54 @@
   border-top: 1px solid var(--glass-border);
 }
 
+/* ============================================
+   PLACEHOLDER STYLES (temporary)
+   ============================================ */
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  min-height: 200px;
+  border: 1px dashed var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tablet (768px) */
 @media (max-width: 768px) {
   .featuresSection,
   .demoSection,
   .ctaSection {
     padding: var(--space-xl) var(--space-md);
   }
-  .heroSection { min-height: 80vh; }
-  .footerSection { padding: var(--space-md); }
+
+  .heroSection {
+    min-height: 80vh;
+  }
+
+  .footerSection {
+    padding: var(--space-md);
+  }
 }
 
+/* Mobile (480px) */
 @media (max-width: 480px) {
   .featuresSection,
   .demoSection,
   .ctaSection {
     padding: var(--space-lg) var(--space-sm);
   }
-  .heroSection { min-height: 70vh; }
+
+  .heroSection {
+    min-height: 70vh;
+  }
 }

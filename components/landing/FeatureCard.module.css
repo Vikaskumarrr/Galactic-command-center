@@ -1,0 +1,157 @@
+/* ============================================
+   FEATURE CARD - Glassmorphism Card Styling
+   ============================================ */
+
+.featureCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-normal) ease;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.featureCard:hover {
+  border-color: var(--glass-border-hover);
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   COLOR VARIANTS - Hover Glow Effects
+   ============================================ */
+
+.featureCard.forceBlue:hover {
+  border-color: var(--force-blue);
+  box-shadow:
+    0 0 20px var(--force-blue-glow),
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.featureCard.jediGreen:hover {
+  border-color: var(--jedi-green);
+  box-shadow:
+    0 0 20px var(--jedi-green-glow),
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.featureCard.empireRed:hover {
+  border-color: var(--empire-red);
+  box-shadow:
+    0 0 20px var(--empire-red-glow),
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   ICON CONTAINER
+   ============================================ */
+
+.iconContainer {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-xs);
+}
+
+.iconContainer.forceBlue {
+  background: var(--force-blue-dim);
+  color: var(--force-blue);
+}
+
+.iconContainer.jediGreen {
+  background: var(--jedi-green-dim);
+  color: var(--jedi-green);
+}
+
+.iconContainer.empireRed {
+  background: var(--empire-red-dim);
+  color: var(--empire-red);
+}
+
+/* ============================================
+   TITLE & DESCRIPTION
+   ============================================ */
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.description {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ============================================
+   SCANLINE ACCENT
+   ============================================ */
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border-hover), transparent);
+  opacity: 0;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.featureCard:hover .scanline {
+  opacity: 1;
+}
+
+/* ============================================
+   RESPONSIVE - Tablet (768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .featureCard {
+    padding: var(--space-lg);
+  }
+
+  .iconContainer {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    font-size: var(--text-base);
+  }
+
+  .description {
+    font-size: var(--text-xs);
+  }
+}
+
+/* ============================================
+   RESPONSIVE - Mobile (480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .featureCard {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+}

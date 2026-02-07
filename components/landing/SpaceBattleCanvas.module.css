@@ -1,0 +1,51 @@
+/* ============================================
+   SpaceBattleCanvas - Canvas container styles
+   ============================================ */
+
+.canvasContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Static fallback background when canvas fails to load */
+.fallbackBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(10, 15, 30, 1) 0%,
+    rgba(5, 7, 10, 1) 100%
+  );
+  z-index: 0;
+}
+
+/* Subtle vignette overlay for depth */
+.canvasContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  z-index: 1;
+}

@@ -1,0 +1,254 @@
+/* ============================================
+   LANDING NAV - FIXED NAVIGATION HEADER
+   ============================================ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-xl);
+  height: 64px;
+  background: rgba(5, 7, 10, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  transition: background var(--duration-normal) ease;
+}
+
+/* ============================================
+   LOGO
+   ============================================ */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--force-blue);
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--force-blue-dim);
+  border: 1px solid var(--force-blue);
+  box-shadow: 0 0 12px var(--force-blue-glow);
+  color: var(--force-blue);
+  transition: box-shadow var(--duration-normal) ease;
+}
+
+.logo:hover .logoIcon {
+  box-shadow: 0 0 20px var(--force-blue-glow), 0 0 40px var(--force-blue-glow);
+}
+
+.logoText {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--force-blue);
+  text-shadow: 0 0 8px var(--force-blue-glow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ============================================
+   DESKTOP NAV LINKS
+   ============================================ */
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast) ease, text-shadow var(--duration-fast) ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--force-blue);
+  text-shadow: 0 0 8px var(--force-blue-glow);
+}
+
+/* ============================================
+   LAUNCH CTA BUTTON
+   ============================================ */
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: transparent;
+  border: 1px solid var(--force-blue);
+  border-radius: var(--radius-sm);
+  color: var(--force-blue);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.ctaButton:hover {
+  background: var(--force-blue);
+  color: var(--galactic-bg);
+  box-shadow: 0 0 20px var(--force-blue-glow);
+}
+
+.ctaButton:focus-visible {
+  outline: 2px solid var(--force-blue);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE MENU TOGGLE
+   ============================================ */
+
+.menuToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.menuToggle:hover {
+  border-color: var(--force-blue);
+  color: var(--force-blue);
+  box-shadow: 0 0 10px var(--force-blue-glow);
+}
+
+.menuToggle:focus-visible {
+  outline: 2px solid var(--force-blue);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE MENU OVERLAY
+   ============================================ */
+
+.mobileMenu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 7, 10, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: var(--z-overlay);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: var(--space-2xl);
+  gap: var(--space-lg);
+}
+
+.mobileMenu.open {
+  display: flex;
+}
+
+.mobileNavLink {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 80%;
+  max-width: 320px;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.mobileNavLink:hover,
+.mobileNavLink:focus-visible {
+  color: var(--force-blue);
+  text-shadow: 0 0 10px var(--force-blue-glow);
+  border-color: var(--glass-border);
+  background: var(--glass-bg);
+}
+
+.mobileCta {
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-2xl);
+  font-size: var(--text-base);
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE (< 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 var(--space-md);
+  }
+
+  .logoText {
+    font-size: var(--text-sm);
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .ctaDesktop {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+}
+
+/* ============================================
+   DESKTOP - HIDE MOBILE ELEMENTS
+   ============================================ */
+
+@media (min-width: 769px) {
+  .mobileMenu {
+    display: none !important;
+  }
+}

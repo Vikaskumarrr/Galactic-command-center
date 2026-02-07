@@ -9,6 +9,12 @@ import { CTASection } from '@/components/landing/CTASection';
 import { Footer } from '@/components/landing/Footer';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
+/* ============================================
+   Section Fallback Components
+   Galactic-themed graceful error messages displayed
+   when a section fails to render.
+   ============================================ */
+
 const sectionFallbackStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
@@ -27,7 +33,7 @@ const fallbackTitleStyle: React.CSSProperties = {
   color: 'var(--empire-red, #ff003c)',
   fontSize: '1.25rem',
   fontWeight: 700,
-  textTransform: 'uppercase' as const,
+  textTransform: 'uppercase',
   letterSpacing: '0.1em',
   marginBottom: '0.75rem',
 };
@@ -43,7 +49,9 @@ function HeroFallback() {
   return (
     <div style={{ ...sectionFallbackStyle, minHeight: '60vh' }} role="alert" aria-label="Hero section error">
       <p style={fallbackTitleStyle}>⚠ Holographic Display Offline</p>
-      <p style={fallbackMessageStyle}>The space battle visualization could not be initialized.</p>
+      <p style={fallbackMessageStyle}>
+        The space battle visualization could not be initialized. The starfield remains calm… for now.
+      </p>
     </div>
   );
 }
@@ -52,7 +60,9 @@ function FeaturesFallback() {
   return (
     <div style={sectionFallbackStyle} role="alert" aria-label="Features section error">
       <p style={fallbackTitleStyle}>⚠ Databank Unavailable</p>
-      <p style={fallbackMessageStyle}>Feature intelligence could not be retrieved.</p>
+      <p style={fallbackMessageStyle}>
+        Feature intelligence could not be retrieved from the galactic archives. Please try again later.
+      </p>
     </div>
   );
 }
@@ -61,7 +71,9 @@ function DemoFallback() {
   return (
     <div style={sectionFallbackStyle} role="alert" aria-label="Demo section error">
       <p style={fallbackTitleStyle}>⚠ Transmission Interrupted</p>
-      <p style={fallbackMessageStyle}>The streaming data demonstration encountered an anomaly.</p>
+      <p style={fallbackMessageStyle}>
+        The streaming data demonstration encountered an anomaly. The signal has been lost.
+      </p>
     </div>
   );
 }
@@ -70,7 +82,9 @@ function CTAFallback() {
   return (
     <div style={sectionFallbackStyle} role="alert" aria-label="Call to action section error">
       <p style={fallbackTitleStyle}>⚠ Navigation Systems Offline</p>
-      <p style={fallbackMessageStyle}>Unable to plot a course to the Command Center.</p>
+      <p style={fallbackMessageStyle}>
+        Unable to plot a course to the Command Center. Please navigate manually to the main application.
+      </p>
     </div>
   );
 }
@@ -78,13 +92,17 @@ function CTAFallback() {
 export default function LandingPage() {
   return (
     <div className={styles.landingPage}>
+      {/* Skip navigation link — visually hidden, focusable for keyboard/screen reader users */}
       <a href="#main-content" className={styles.skipNav}>
         Skip to main content
       </a>
 
+      {/* Fixed Navigation */}
       <LandingNav />
 
+      {/* Main content area */}
       <main id="main-content">
+        {/* Hero Section - Animated Space Battle */}
         <div id="hero" className={`${styles.section} ${styles.heroSection}`}>
           <ErrorBoundary fallback={<HeroFallback />}>
             <HeroSection
@@ -96,13 +114,23 @@ export default function LandingPage() {
           </ErrorBoundary>
         </div>
 
-        <section id="features" className={`${styles.section} ${styles.featuresSection}`} aria-label="Features">
+        {/* Features Section */}
+        <section
+          id="features"
+          className={`${styles.section} ${styles.featuresSection}`}
+          aria-label="Features"
+        >
           <ErrorBoundary fallback={<FeaturesFallback />}>
             <FeaturesSection />
           </ErrorBoundary>
         </section>
 
-        <section id="demo" className={`${styles.section} ${styles.demoSection}`} aria-label="Demo">
+        {/* Demo Section - Streaming Data Visualization */}
+        <section
+          id="demo"
+          className={`${styles.section} ${styles.demoSection}`}
+          aria-label="Demo"
+        >
           <ErrorBoundary fallback={<DemoFallback />}>
             <DemoSection
               title="See It In Action"
@@ -111,19 +139,34 @@ export default function LandingPage() {
           </ErrorBoundary>
         </section>
 
-        <section id="launch" className={`${styles.section} ${styles.ctaSection}`} aria-label="Call to action">
+        {/* Call to Action Section */}
+        <section
+          id="launch"
+          className={`${styles.section} ${styles.ctaSection}`}
+          aria-label="Call to action"
+        >
           <ErrorBoundary fallback={<CTAFallback />}>
             <CTASection
               title="Ready to Command the Galaxy?"
               subtitle="Join the Galactic Command Center and take control of your fleet operations with cutting-edge AI technology."
-              primaryCta={{ text: 'Launch Command Center', href: '/command' }}
-              secondaryCta={{ text: 'Learn More', href: '#features' }}
+              primaryCta={{
+                text: 'Launch Command Center',
+                href: '/command',
+              }}
+              secondaryCta={{
+                text: 'Learn More',
+                href: '#features',
+              }}
             />
           </ErrorBoundary>
         </section>
       </main>
 
-      <footer className={`${styles.section} ${styles.footerSection}`} aria-label="Footer">
+      {/* Footer */}
+      <footer
+        className={`${styles.section} ${styles.footerSection}`}
+        aria-label="Footer"
+      >
         <Footer />
       </footer>
     </div>

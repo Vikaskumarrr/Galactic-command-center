@@ -1,0 +1,123 @@
+/* ============================================
+   StreamingDataDisplay - Streaming data styles
+   Placeholder styles for task 4.1; full styling in task 4.5
+   ============================================ */
+
+.container {
+  position: relative;
+  background: var(--glass-bg, rgba(15, 20, 30, 0.7));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-lg, 1.5rem);
+  min-height: 120px;
+  overflow: hidden;
+}
+
+.contentArea {
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: var(--text-base, 0.95rem);
+  line-height: 1.7;
+  color: var(--text-main, #e0e6ed);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.streamedText {
+  color: var(--force-blue, #00e5ff);
+}
+
+/* Blinking cursor for typing effect */
+.cursor {
+  display: inline;
+  color: var(--force-blue, #00e5ff);
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Loading indicator - pulsing dots */
+.loadingIndicator {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--space-md, 1rem);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--force-blue, #00e5ff);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Error state */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md, 1rem);
+  padding: var(--space-xl, 2rem);
+  text-align: center;
+}
+
+.errorIcon {
+  font-size: 2rem;
+  color: var(--empire-red, #ff003c);
+}
+
+.errorMessage {
+  color: var(--empire-red, #ff003c);
+  font-size: var(--text-sm, 0.8rem);
+}
+
+.retryButton {
+  background: transparent;
+  border: 1px solid var(--force-blue, #00e5ff);
+  color: var(--force-blue, #00e5ff);
+  padding: var(--space-sm, 0.5rem) var(--space-lg, 1.5rem);
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: var(--text-sm, 0.8rem);
+  letter-spacing: 0.05em;
+  transition: all 150ms ease;
+}
+
+.retryButton:hover {
+  background: var(--force-blue, #00e5ff);
+  color: var(--galactic-bg, #05070a);
+  box-shadow: 0 0 15px var(--force-blue-glow, rgba(0, 229, 255, 0.4));
+}

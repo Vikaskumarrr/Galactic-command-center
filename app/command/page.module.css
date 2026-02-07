@@ -1,0 +1,108 @@
+/* ============================================
+   APP SHELL - CSS MODULE (Command Center)
+   ============================================ */
+
+.appShell {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-columns: var(--sidebar-width-expanded) 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--galactic-bg);
+}
+
+.appShell.sidebarCollapsed {
+  grid-template-columns: var(--sidebar-width-collapsed) 1fr;
+}
+
+.header { grid-area: header; z-index: var(--z-sticky); }
+.sidebar { grid-area: sidebar; z-index: var(--z-dropdown); }
+
+.mainContent {
+  grid-area: main;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--galactic-bg);
+}
+
+.mainContentInner {
+  flex: 1;
+  padding: var(--space-xl);
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.holoOverlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .appShell {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "main";
+  }
+  .appShell.sidebarCollapsed { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed;
+    top: var(--header-height); left: 0; bottom: 0;
+    width: var(--sidebar-width-expanded);
+    transform: translateX(-100%);
+    transition: transform var(--duration-normal) ease;
+    z-index: var(--z-overlay);
+  }
+  .sidebar.sidebarOpen { transform: translateX(0); }
+  .mainContent { grid-column: 1; }
+  .mainContentInner { padding: var(--space-md); }
+  .sidebarBackdrop {
+    position: fixed;
+    top: var(--header-height); left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: calc(var(--z-overlay) - 1);
+    opacity: 0; visibility: hidden;
+    transition: opacity var(--duration-normal) ease, visibility var(--duration-normal) ease;
+  }
+  .sidebarBackdrop.visible { opacity: 1; visibility: visible; }
+}
+
+.chatContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chatContainer :global(.tambo-chat) { background: transparent; height: 100%; }
+.chatContainer :global(.tambo-chat-messages) { flex: 1; overflow-y: auto; padding-bottom: var(--space-lg); }
+.chatContainer :global(.tambo-chat-input) {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  color: var(--text-main);
+}
+.chatContainer :global(.tambo-chat-input:focus) {
+  border-color: var(--force-blue);
+  box-shadow: 0 0 0 2px var(--force-blue-glow);
+  outline: none;
+}
+.chatContainer :global(.tambo-chat-send-button) {
+  background: var(--force-blue);
+  color: var(--galactic-bg);
+  border: none;
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) ease;
+}
+.chatContainer :global(.tambo-chat-send-button:hover) {
+  box-shadow: 0 0 15px var(--force-blue);
+}

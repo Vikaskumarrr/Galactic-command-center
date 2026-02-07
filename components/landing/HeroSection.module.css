@@ -1,0 +1,204 @@
+/* ============================================
+   HERO SECTION - Layout & Styling
+   ============================================ */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ============================================
+   CANVAS BACKGROUND LAYER
+   ============================================ */
+
+.canvasBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* ============================================
+   CONTENT OVERLAY
+   ============================================ */
+
+.contentOverlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 800px;
+  width: 100%;
+}
+
+/* Glassmorphism panel behind the content */
+.glassPanel {
+  background: rgba(10, 14, 20, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-2xl);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   HOLOGRAPHIC TITLE
+   ============================================ */
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: var(--space-lg);
+  color: var(--force-blue);
+  text-shadow:
+    0 0 10px var(--force-blue-glow),
+    0 0 30px var(--force-blue-glow),
+    0 0 60px rgba(0, 229, 255, 0.2);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow:
+      0 0 10px var(--force-blue-glow),
+      0 0 30px var(--force-blue-glow),
+      0 0 60px rgba(0, 229, 255, 0.2);
+  }
+  100% {
+    text-shadow:
+      0 0 15px var(--force-blue-glow),
+      0 0 40px var(--force-blue-glow),
+      0 0 80px rgba(0, 229, 255, 0.3);
+  }
+}
+
+/* ============================================
+   SUBTITLE
+   ============================================ */
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+  max-width: 600px;
+}
+
+/* ============================================
+   CTA BUTTON
+   ============================================ */
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-2xl);
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--galactic-bg);
+  background: var(--force-blue);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+  box-shadow:
+    0 0 20px var(--force-blue-glow),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.ctaButton:hover {
+  background: #33ecff;
+  box-shadow:
+    0 0 30px var(--force-blue-glow),
+    0 0 60px rgba(0, 229, 255, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+}
+
+.ctaButton:focus-visible {
+  outline: 2px solid var(--force-blue);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   RESPONSIVE - Tablet (768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .contentOverlay {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .glassPanel {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .title {
+    font-size: 2.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  .subtitle {
+    font-size: var(--text-base);
+  }
+
+  .ctaButton {
+    padding: var(--space-sm) var(--space-xl);
+    font-size: var(--text-sm);
+  }
+}
+
+/* ============================================
+   RESPONSIVE - Mobile (480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .contentOverlay {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .glassPanel {
+    padding: var(--space-lg) var(--space-md);
+    border-radius: var(--radius-lg);
+  }
+
+  .title {
+    font-size: 1.8rem;
+    letter-spacing: 0.06em;
+  }
+
+  .subtitle {
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .ctaButton {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-sm);
+    width: 100%;
+  }
+}
