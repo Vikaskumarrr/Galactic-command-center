@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Orbitron } from "next/font/google";
 import "./globals.css";
 import { TamboWrapper } from "@/components/TamboWrapper";
 
@@ -11,6 +11,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -52,7 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable}`} suppressHydrationWarning>
         <TamboWrapper apiKey={process.env.NEXT_PUBLIC_TAMBO_API_KEY || ""}>
           {children}
         </TamboWrapper>

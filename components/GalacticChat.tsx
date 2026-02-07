@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useTamboThread, useTamboThreadInput, useTamboGenerationStage } from '@tambo-ai/react';
-import { Send, Loader2, Bot, User } from 'lucide-react';
+import { Send, Loader2, Bot, User, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './GalacticChat.module.css';
 
@@ -17,8 +17,10 @@ const ChatInput: React.FC<{
   value: string;
   onChange: (value: string) => void;
   onSubmit: () => void;
+  onClear: () => void;
   isLoading: boolean;
-}> = ({ value, onChange, onSubmit, isLoading }) => {
+  hasMessages: boolean;
+}> = ({ value, onChange, onSubmit, onClear, isLoading, hasMessages }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (value.trim() && !isLoading) {
@@ -28,6 +30,18 @@ const ChatInput: React.FC<{
 
   return (
     <form className={styles.inputForm} onSubmit={handleSubmit}>
+      {hasMessages && (
+        <button
+          type="button"
+          className={styles.clearButton}
+          onClick={onClear}
+          disabled={isLoading}
+          aria-label="Clear chat"
+          title="Clear chat"
+        >
+          <Trash2 size={16} />
+        </button>
+      )}
       <input
         type="text"
         value={value}
@@ -125,7 +139,7 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
-  const { thread, streaming } = useTamboThread();
+  const { thread, streaming, startNewThread } = useTamboThread();
   const { value, setValue, submit } = useTamboThreadInput();
   const { isIdle, generationStage } = useTamboGenerationStage();
 
@@ -228,6 +242,14 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
     }
   };
 
+  const handleClearChat = () => {
+    startNewThread();
+    setValue('');
+    setError(null);
+    setHasSubmitted(false);
+    prevMessageCount.current = 0;
+  };
+
   // Generation stage label for the loading indicator
   const getStageLabel = () => {
     switch (generationStage) {
@@ -295,7 +317,9 @@ export const GalacticChat: React.FC<GalacticChatProps> = ({
         value={value} 
         onChange={setValue} 
         onSubmit={handleSubmit} 
-        isLoading={isLoading} 
+        onClear={handleClearChat}
+        isLoading={isLoading}
+        hasMessages={messageCount > 0}
       />
     </div>
   );

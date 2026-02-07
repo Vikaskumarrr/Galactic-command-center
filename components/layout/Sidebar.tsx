@@ -10,6 +10,7 @@ import {
   Swords, 
   Navigation,
 } from 'lucide-react';
+import { useDiagnostics } from '@/lib/useDiagnostics';
 import styles from './Sidebar.module.css';
 
 interface SidebarProps {
@@ -26,58 +27,6 @@ const navItems = [
   { icon: Swords, label: 'Battle Status', id: 'battle', prompt: 'What is the current battle status and threat level?' },
   { icon: Navigation, label: 'Hyperdrive', id: 'hyperdrive', prompt: 'Calculate hyperspace routes between planets' },
 ];
-
-// Simulated real-time diagnostics data
-type DiagnosticStatus = 'Stable' | 'Warning' | 'Optimal' | 'Low';
-
-interface DiagnosticData {
-  value: number;
-  status: DiagnosticStatus;
-}
-
-interface Diagnostics {
-  hyperdrive: DiagnosticData;
-  shields: DiagnosticData;
-  powerCore: DiagnosticData;
-}
-
-const useDiagnostics = () => {
-  const [diagnostics, setDiagnostics] = useState<Diagnostics>({
-    hyperdrive: { value: 92, status: 'Stable' },
-    shields: { value: 45, status: 'Warning' },
-    powerCore: { value: 78, status: 'Optimal' },
-  });
-
-  useEffect(() => {
-    // Simulate real-time updates
-    const interval = setInterval(() => {
-      setDiagnostics(prev => {
-        const newHyperdriveValue = Math.min(100, Math.max(80, prev.hyperdrive.value + (Math.random() - 0.5) * 4));
-        const newShieldsValue = Math.min(100, Math.max(20, prev.shields.value + (Math.random() - 0.3) * 6));
-        const newPowerCoreValue = Math.min(100, Math.max(60, prev.powerCore.value + (Math.random() - 0.5) * 3));
-        
-        return {
-          hyperdrive: {
-            value: newHyperdriveValue,
-            status: newHyperdriveValue > 85 ? 'Stable' : 'Warning',
-          },
-          shields: {
-            value: newShieldsValue,
-            status: newShieldsValue > 60 ? 'Stable' : 'Warning',
-          },
-          powerCore: {
-            value: newPowerCoreValue,
-            status: newPowerCoreValue > 70 ? 'Optimal' : 'Low',
-          },
-        };
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return diagnostics;
-};
 
 export const Sidebar: React.FC<SidebarProps> = ({ 
   isOpen, 

@@ -1,0 +1,211 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+}
+
+.panel {
+  position: relative;
+  width: 460px;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.98), rgba(28, 36, 86, 0.35));
+  border: 1px solid rgba(74, 142, 255, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  box-shadow:
+    0 0 60px rgba(20, 34, 186, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.closeBtn {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-dim);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.closeBtn:hover {
+  color: var(--empire-red);
+  border-color: var(--empire-red);
+}
+
+.title {
+  font-family: var(--font-orbitron), sans-serif;
+  font-size: var(--text-lg);
+  color: var(--force-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-lg);
+}
+
+.section {
+  margin-bottom: var(--space-lg);
+}
+
+.sectionTitle {
+  font-family: var(--font-orbitron), sans-serif;
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Status bars */
+.statusGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.statusLabel {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.statusBar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.statusFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.statusValue {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  width: 36px;
+  text-align: right;
+}
+
+/* Toggle rows */
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.toggleRow:last-child {
+  border-bottom: none;
+}
+
+.toggleInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.toggleIcon {
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.toggleLabel {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--text-main);
+}
+
+.toggleDesc {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--duration-fast) ease;
+  flex-shrink: 0;
+}
+
+.toggleOn {
+  background: var(--force-blue);
+  border-color: var(--force-blue);
+  box-shadow: 0 0 10px var(--force-blue-glow);
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  transition: transform var(--duration-fast) ease;
+}
+
+.toggleOn .toggleKnob {
+  transform: translateX(20px);
+}
+
+/* Info grid */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.infoItem {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+}
+
+.infoLabel {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.infoValue {
+  display: block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: var(--text-sm);
+  color: var(--force-blue);
+}

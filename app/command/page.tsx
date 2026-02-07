@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { GalacticChat } from '@/components/GalacticChat';
 import { SplashScreen } from '@/components/SplashScreen';
+import { Starfield } from '@/components/Starfield';
 import { STORAGE_KEYS, MOBILE_BREAKPOINT } from '@/lib/theme';
 import styles from './page.module.css';
 
@@ -71,6 +72,7 @@ export default function CommandPage() {
         />
       )}
       <main className={styles.mainContent} role="main" aria-label="Main content">
+        <Starfield className={styles.starfield} />
         <div className={styles.holoOverlay} aria-hidden="true" />
         <div className={styles.mainContentInner}>
           <div className={styles.chatContainer}>
